@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 // import {UUID} from "angular2-uuid";
 export interface Task {
   id: string;
@@ -27,28 +27,31 @@ export class TaskService {
     this.saveTasksToLocalStorage(tasks);
   }
 
-  getTasks(): Task[] {
+  getCurrentTasks(): Task[] {
     return this.tasksSubject.value;
   }
 
+  getTasks(): Observable<Task[]> {
+    return this.tasks$
+  }
+
   addNewTask(newTask: Task): void {
-    const currentTaskList: Task[] = this.getTasks();
+    let currentTaskList: Task[] = this.getCurrentTasks();
     this.setTasks([...currentTaskList, newTask])
   }
 
   toggleTaskStateById(id: string){
-    const currentTaskList: Task[] = this.getTasks();
+    const currentTaskList: Task[] = this.getCurrentTasks();
     const taskToUpdate = currentTaskList.find(task => task.id === id);
 
       if (taskToUpdate) {
         taskToUpdate.isDone = !taskToUpdate.isDone;
+        this.setTasks(currentTaskList)
       }
-
-      this.setTasks(currentTaskList)
   }
 
   removeTaskById(id: string): void {
-    const currentTaskList: Task[] = this.getTasks();
+    const currentTaskList: Task[] = this.getCurrentTasks();
     const updatedTaskList: Task[] = currentTaskList.filter((task: Task) => task.id !== id);
     this.setTasks(updatedTaskList);
   }

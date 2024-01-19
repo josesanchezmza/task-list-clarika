@@ -26,16 +26,15 @@ export class TaskListComponent implements OnInit, OnDestroy {
   constructor(private taskService: TaskService) {
   }
 
-  ngOnInit(){
-    const taskSubscription=  this.taskService.tasks$.subscribe((tasks)=>{
-      this.taskList=[...tasks];
+  ngOnInit() {
+    const taskSubscription = this.taskService.getTasks().subscribe((tasks) => {
+      this.taskList = [...tasks];
     });
 
-
-    this.subscriptions = [...this.subscriptions, taskSubscription]
+    this.subscriptions = [taskSubscription]
   }
 
-  ngOnDestroy(){
-    this.subscriptions.forEach((sub)=>sub.unsubscribe());
+  ngOnDestroy() {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 }
