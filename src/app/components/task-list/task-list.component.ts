@@ -1,24 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {JsonPipe, NgForOf, NgIf, NgStyle} from "@angular/common";
+import {NgForOf, NgStyle} from "@angular/common";
 import {TaskFormComponent} from "../task-form/task-form.component";
-import {TaskService} from "../../../services/task.service";
+import {Task, TaskService} from "../../../services/task.service";
 import {Subscription} from "rxjs";
 import {TaskItemComponent} from "../task-item/task-item.component";
-interface Task {
-  id: string
-  name: string
-  isDone: boolean
-}
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   imports: [
-    JsonPipe,
     NgForOf,
     NgStyle,
     TaskFormComponent,
-    NgIf,
     TaskItemComponent
   ],
   templateUrl: './task-list.component.html',
@@ -36,7 +29,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnInit(){
     const taskSubscription=  this.taskService.tasks$.subscribe((tasks)=>{
       this.taskList=[...tasks];
-      console.log("=>(task-list.component.ts:38) tasks", tasks);
     });
 
 
@@ -45,10 +37,5 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.subscriptions.forEach((sub)=>sub.unsubscribe());
-  }
-
-
-  toggleTaskFormVisibility() {
-    this.isTaskFormVisible=!this.isTaskFormVisible;
   }
 }

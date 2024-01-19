@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {UUID} from "angular2-uuid";
+// import {UUID} from "angular2-uuid";
 export interface Task {
   id: string;
   name: string;

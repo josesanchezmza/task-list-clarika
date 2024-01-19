@@ -1,12 +1,13 @@
 import {Component, Input} from '@angular/core';
-import {NgStyle} from "@angular/common";
+import {NgForOf, NgStyle} from "@angular/common";
 import {Task, TaskService} from "../../../services/task.service";
 
 @Component({
   selector: 'app-task-item',
   standalone: true,
   imports: [
-    NgStyle
+    NgStyle,
+    NgForOf
   ],
   templateUrl: './task-item.component.html',
   styleUrl: './task-item.component.scss'

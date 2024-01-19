@@ -1,6 +1,15 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" formControlName="name" required>
-    <button type="submit">Guardar</button>
-</form>
-<button (click)="close()">Cerrar</button>
+<div class="form-container">
+    <div class="form-header">
+        <span>Agregar Tarea</span>
+    </div>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="form-body">
+            <label for="name">Nombre: </label>
+            <input type="text" id="name" formControlName="name" required>
+        </div>
+        <div class="form-footer">
+            <button [disabled]="!taskForm.valid" type="submit">Guardar</button>
+        </div>
+    </form>
+</div>
+

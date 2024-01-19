@@ -1,3 +1,14 @@
-<button (click)="toggleTaskFormVisibility()">Agregar Tarea</button>
-<app-task-item *ngFor="let task of taskList" [task]="task"></app-task-item>
-<app-task-form *ngIf="isTaskFormVisible" (onClose)="toggleTaskFormVisibility()"></app-task-form>
+<div class="grid-container">
+    <div class="grid-header">
+        <div></div>
+        <div class="name-column">Name</div>
+        <div></div>
+    </div>
+    <app-task-item  *ngFor="let task of taskList" [task]="task"></app-task-item>
+</div>
+
+
+
+
+
+

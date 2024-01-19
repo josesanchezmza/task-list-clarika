@@ -1,0 +1,23 @@
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 15vh;
+  background-color: chartreuse;
+}
+
+.body{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #202025;
+  min-height: 80vh;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: chartreuse;
+  min-height: 5vh;
+}
