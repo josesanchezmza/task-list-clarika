@@ -5,7 +5,6 @@ import {Task, TaskService} from "../../../services/task.service";
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
 import {of} from "rxjs";
 
-
 describe('Task List Componente', ()=>{
   let component: TaskListComponent;
   let fixture: ComponentFixture<TaskListComponent>;
@@ -45,65 +44,8 @@ describe('Task List Componente', ()=>{
 
   it('En ngOnDestroy debería desubscripción al obs de task', () => {
     spyOn(component.subscriptions[0], 'unsubscribe');
-
     component.ngOnDestroy();
-
     expect(component.subscriptions[0].unsubscribe).toHaveBeenCalled();
   });
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
-//
-// import { TaskListComponent } from './task-list.component';
-//
-// describe('TaskListComponent', () => {
-//   let component: TaskListComponent;
-//   let fixture: ComponentFixture<TaskListComponent>;
-//
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       imports: [TaskListComponent]
-//     })
-//     .compileComponents();
-//
-//     fixture = TestBed.createComponent(TaskListComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-//
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
