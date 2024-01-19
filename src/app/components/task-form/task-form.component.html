@@ -1,0 +1,6 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" formControlName="name" required>
+    <button type="submit">Guardar</button>
+</form>
+<button (click)="close()">Cerrar</button>

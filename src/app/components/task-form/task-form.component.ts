@@ -1,0 +1,59 @@
+import {Component, EventEmitter, Output} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {UUID} from "angular2-uuid";
+import {TaskService} from "../../../services/task.service";
+
+@Component({
+  selector: 'app-task-form',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule
+  ],
+  templateUrl: './task-form.component.html',
+  styleUrl: './task-form.component.scss'
+})
+export class TaskFormComponent {
+  @Output() onClose = new EventEmitter<boolean>();
+
+  taskForm: FormGroup;
+
+  constructor(
+      private fb: FormBuilder,
+      private taskService: TaskService) {
+    this.taskForm = this.fb.group({
+      id: [UUID.UUID(), Validators.required],
+      name: ['', Validators.required],
+      isDone: [false]
+    });
+  }
+
+  ngOnInit(){
+
+  }
+
+  onSubmit(): void {
+
+    this.taskService.addNewTask(this.taskForm.value);
+    // console.log('New Task:', this.taskForm.value);
+
+
+    // this.taskForm.reset({
+    //   id: UUID.UUID(),
+    //   name: '',
+    //   isDone: false
+    // });
+    this.onClose.emit(true);
+  }
+
+
+
+  close(): void {
+    this.onClose.emit(true);
+  }
+
+  // addTask(): void {
+  //   const newTask: Task = { id: '4', name: 'New Task', isDone: false };
+  //   const updatedTasks = [...this.taskService.getTasks(), newTask];
+  //   this.taskService.setTasks(updatedTasks);
+  // }
+}

@@ -1,0 +1,18 @@
+<p>task-list works</p>
+
+<button (click)="toogleTaskFormVisibility()">Agregar Tarea</button>
+
+<div *ngFor="let task of taskList; index as i" class="task-item">
+    <div>
+        <input type="checkbox" [checked]="task.isDone" (click)="toggleTaskState(task.id)">
+    </div>
+    <div [ngStyle]="{ 'text-decoration': task.isDone ? 'line-through' : 'none' }">
+        {{task.name}}
+    </div>
+    <div>
+        <button (click)="removeTask(task.id)"> Eliminar </button>
+    </div>
+    <hr>
+</div>
+
+<app-task-form *ngIf="isTaskFormVisible" (onClose)="toogleTaskFormVisibility()"></app-task-form>
