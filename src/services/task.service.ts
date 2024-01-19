@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {UUID} from "angular2-uuid";
 export interface Task {
   id: string;
   name: string;
@@ -10,61 +11,55 @@ export interface Task {
 })
 export class TaskService {
   private tasksSubject = new BehaviorSubject<Task[]>([]);
+  private localStorageKey = 'tasks';
   tasks$ = this.tasksSubject.asObservable();
   constructor() {
-    this.setTasks([
-      { id: '1', name: 'Task 1', isDone: false },
-      { id: '2', name: 'Task 2', isDone: true },
-      { id: '3', name: 'Task 3', isDone: false }
-    ]);
+    this.loadTasksFromLocalStorage();
+    // this.setTasks([
+    //   { id: UUID.UUID(), name: 'Pasear al perro', isDone: false },
+    //   { id: UUID.UUID(), name: 'Comprar Comida', isDone: false },
+    //   { id: UUID.UUID(), name: 'Pagar el alquiler', isDone: false }
+    // ]);
   }
-
 
   setTasks(tasks: Task[]): void {
     this.tasksSubject.next(tasks);
+    this.saveTasksToLocalStorage(tasks);
   }
-
-  addNewTask(newTask: Task): void {
-    const currentTaskList = this.getTasks();
-    console.log("=>(task.service.ts:29) currentTaskList", currentTaskList);
-    this.setTasks([...currentTaskList, newTask])
-  }
-
-  // removeTaskById(id: String): void {
-  //   this.tasksSubject.next([...tasks, newTask]);
-  // }
 
   getTasks(): Task[] {
-    console.log("=>(task.service.ts:37) this.tasksSubject.value", this.tasksSubject.value);
     return this.tasksSubject.value;
   }
 
+  addNewTask(newTask: Task): void {
+    const currentTaskList: Task[] = this.getTasks();
+    this.setTasks([...currentTaskList, newTask])
+  }
 
+  toggleTaskStateById(id: string){
+    const currentTaskList: Task[] = this.getTasks();
+    const taskToUpdate = currentTaskList.find(task => task.id === id);
 
+      if (taskToUpdate) {
+        taskToUpdate.isDone = !taskToUpdate.isDone;
+      }
 
+      this.setTasks(currentTaskList)
+  }
 
+  removeTaskById(id: string): void {
+    const currentTaskList: Task[] = this.getTasks();
+    const updatedTaskList: Task[] = currentTaskList.filter((task: Task) => task.id !== id);
+    this.setTasks(updatedTaskList);
+  }
 
+  private saveTasksToLocalStorage(tasks: Task[]): void {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(tasks));
+  }
+  private loadTasksFromLocalStorage(): void {
+    const storedTasks = localStorage.getItem(this.localStorageKey);
+    const tasks: Task[] = storedTasks ? JSON.parse(storedTasks) : [];
+    this.setTasks(tasks);
+  }
 
-  //
-  //
-  // toggleTaskState(id: string, list: Task[]): void {
-  //
-  //   const foundTask = list.find(task => task.id === id);
-  //
-  //   if (foundTask) {
-  //     foundTask.isDone = !foundTask.isDone;
-  //   }
-  //
-  //   this.setTasks([...list])
-  // }
-  //
-  // removeTask(taskId: string, list: Task[]): void {
-  //   const indexToRemove = list.findIndex(task => task.id === taskId);
-  //
-  //   if (indexToRemove !== -1) {
-  //     list.splice(indexToRemove, 1);
-  //   }
-  //
-  //   this.setTasks([...list])
-  // }
 }

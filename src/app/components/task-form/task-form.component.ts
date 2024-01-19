@@ -13,7 +13,7 @@ import {TaskService} from "../../../services/task.service";
   styleUrl: './task-form.component.scss'
 })
 export class TaskFormComponent {
-  @Output() onClose = new EventEmitter<boolean>();
+  @Output() onClose = new EventEmitter();
 
   taskForm: FormGroup;
 
@@ -32,28 +32,19 @@ export class TaskFormComponent {
   }
 
   onSubmit(): void {
-
     this.taskService.addNewTask(this.taskForm.value);
-    // console.log('New Task:', this.taskForm.value);
-
 
     // this.taskForm.reset({
     //   id: UUID.UUID(),
     //   name: '',
     //   isDone: false
     // });
-    this.onClose.emit(true);
+    this.onClose.emit();
   }
 
 
 
   close(): void {
-    this.onClose.emit(true);
+    this.onClose.emit();
   }
-
-  // addTask(): void {
-  //   const newTask: Task = { id: '4', name: 'New Task', isDone: false };
-  //   const updatedTasks = [...this.taskService.getTasks(), newTask];
-  //   this.taskService.setTasks(updatedTasks);
-  // }
 }

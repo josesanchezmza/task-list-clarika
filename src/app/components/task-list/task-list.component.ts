@@ -3,6 +3,7 @@ import {JsonPipe, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {TaskFormComponent} from "../task-form/task-form.component";
 import {TaskService} from "../../../services/task.service";
 import {Subscription} from "rxjs";
+import {TaskItemComponent} from "../task-item/task-item.component";
 interface Task {
   id: string
   name: string
@@ -17,7 +18,8 @@ interface Task {
     NgForOf,
     NgStyle,
     TaskFormComponent,
-    NgIf
+    NgIf,
+    TaskItemComponent
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
@@ -45,26 +47,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((sub)=>sub.unsubscribe());
   }
 
-  toggleTaskState(id: string): void {
-    const foundTask = this.taskList.find(task => task.id === id);
 
-    if (foundTask) {
-      foundTask.isDone = !foundTask.isDone;
-    }
-    this.taskService.setTasks([...this.taskList])
-  }
-
-  removeTask(taskId: string): void {
-    const indexToRemove = this.taskList.findIndex(task => task.id === taskId);
-
-    if (indexToRemove !== -1) {
-      this.taskList.splice(indexToRemove, 1);
-    }
-    this.taskService.setTasks([...this.taskList])
-  }
-
-  toogleTaskFormVisibility() {
-    console.log("=>(task-list.component.ts:59) ");
+  toggleTaskFormVisibility() {
     this.isTaskFormVisible=!this.isTaskFormVisible;
   }
 }
