@@ -1,3 +1,4 @@
+<hr *ngIf="taskList.length">
 <ul>
     <li>
         <app-task-item *ngFor="let task of taskList" [task]="task"></app-task-item>

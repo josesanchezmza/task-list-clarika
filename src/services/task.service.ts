@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-// import {UUID} from "angular2-uuid";
+import {UUID} from "angular2-uuid";
 export interface Task {
   id: string;
   name: string;
@@ -15,11 +15,6 @@ export class TaskService {
   tasks$ = this.tasksSubject.asObservable();
   constructor() {
     this.loadTasksFromLocalStorage();
-    // this.setTasks([
-    //   { id: UUID.UUID(), name: 'Pasear al perro', isDone: false },
-    //   { id: UUID.UUID(), name: 'Comprar Comida', isDone: false },
-    //   { id: UUID.UUID(), name: 'Pagar el alquiler', isDone: false }
-    // ]);
   }
 
   setTasks(tasks: Task[]): void {
@@ -61,7 +56,17 @@ export class TaskService {
   }
   private loadTasksFromLocalStorage(): void {
     const storedTasks = localStorage.getItem(this.localStorageKey);
-    const tasks: Task[] = storedTasks ? JSON.parse(storedTasks) : [];
+    let tasks: Task[];
+
+    if (storedTasks) {
+      tasks = storedTasks ? JSON.parse(storedTasks) : [];
+    } else {
+      tasks= [
+        { id: UUID.UUID(), name: 'Pasear al perro', isDone: false },
+        { id: UUID.UUID(), name: 'Comprar comida', isDone: false },
+        { id: UUID.UUID(), name: 'Pagar el alquiler', isDone: false }
+      ];
+    }
     this.setTasks(tasks);
   }
 

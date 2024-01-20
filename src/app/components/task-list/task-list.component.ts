@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NgForOf, NgStyle} from "@angular/common";
+import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {TaskFormComponent} from "../task-form/task-form.component";
 import {Task, TaskService} from "../../../services/task.service";
 import {Subscription} from "rxjs";
@@ -12,7 +12,8 @@ import {TaskItemComponent} from "../task-item/task-item.component";
     NgForOf,
     NgStyle,
     TaskFormComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    NgIf
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
