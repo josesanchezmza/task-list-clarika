@@ -1,12 +1,12 @@
-<div class="grid-row">
+<div class="item-container">
     <div>
-        <input type="checkbox" [checked]="task.isDone" (click)="toggleTaskState(task.id)">
+        <input type="checkbox" class="custom-checkbox" [checked]="task.isDone" (click)="toggleTaskState(task.id)">
     </div>
-    <div class="name-column" [ngStyle]="{ 'text-decoration': task.isDone ? 'line-through' : 'none' }">
+    <div class="text-column" [ngClass]="{'task-done-text': task.isDone}">
         {{ task.name }}
     </div>
     <div>
-        <button (click)="removeTask(task.id)">Eliminar</button>
+        <button (click)="removeTask(task.id)" class="button-delete"><span class="material-symbols-outlined">delete</span></button>
     </div>
 </div>
 

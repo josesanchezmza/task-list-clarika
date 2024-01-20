@@ -1,17 +1,29 @@
-.grid-row {
+.item-container {
   display: flex;
   justify-content: space-between;
-  padding: 0 10px 10px 10px ;
-  border-bottom: 1px solid #ccc;
-}
+  align-items: flex-start;
+  margin-top: 15px;
+  min-height: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
 
-.grid-row:last-child {
-  border-bottom: none;
-}
+  .text-column {
+    text-align: left;
+    width: 100%;
+    padding-inline: 5px;
+  }
 
-.name-column{
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  padding-inline: 10px;
+  .task-done-text {
+     text-decoration: line-through;
+     opacity: 0.7;
+   }
+
+  .custom-checkbox {
+    transform: scale(1.2);
+    margin-right: 8px;
+
+  }
 }
