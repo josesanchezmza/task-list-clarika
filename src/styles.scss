@@ -1,18 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
+  color: #383838;
+  background-color: #e0e0e0;
+  padding: 20px;
 
   button {
-    background-color: #008bb7;
-    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #04116d;
     padding: 10px 15px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    opacity: 1;
+    background-color: transparent;
+
+    &.button-disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    &.button-add {
+      background-color: #87a3fd;
+    }
   }
 
   button:hover {
-    background-color: #00b3ec;
+    opacity: 0.8;
+
+    &.button-disabled {
+      opacity: 0.3;
+    }
+
+    &.button-delete {
+      background-color: #d5e1ff;
+    }
   }
 }

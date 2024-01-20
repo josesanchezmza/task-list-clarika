@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NgForOf, NgStyle} from "@angular/common";
+import {NgClass, NgForOf, NgStyle} from "@angular/common";
 import {Task, TaskService} from "../../../services/task.service";
 
 @Component({
@@ -7,7 +7,8 @@ import {Task, TaskService} from "../../../services/task.service";
   standalone: true,
   imports: [
     NgStyle,
-    NgForOf
+    NgForOf,
+    NgClass
   ],
   templateUrl: './task-item.component.html',
   styleUrl: './task-item.component.scss'

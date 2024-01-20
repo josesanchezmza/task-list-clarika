@@ -1,15 +1,11 @@
-<div class="form-container">
-    <div class="form-header">
-        <span>Agregar Tarea</span>
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+        <input placeholder="Agregar nueva tarea..." autocomplete="off" type="text" id="task-name" formControlName="name"
+               required>
+        <button class="button-add" [ngClass]="{'button-disabled': !taskForm.valid}" [disabled]="!taskForm.valid"
+                type="submit"><span
+                class="material-symbols-outlined">add</span></button>
     </div>
-    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-        <div class="form-body">
-            <label for="name">Nombre: </label>
-            <input type="text" id="name" formControlName="name" required>
-        </div>
-        <div class="form-footer">
-            <button [disabled]="!taskForm.valid" type="submit">Guardar</button>
-        </div>
-    </form>
-</div>
+</form>
+
 

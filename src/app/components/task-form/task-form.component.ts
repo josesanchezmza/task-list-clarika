@@ -2,13 +2,15 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UUID} from "angular2-uuid";
 import {TaskService} from "../../../services/task.service";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule
-  ],
+    imports: [
+        ReactiveFormsModule,
+        NgClass
+    ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss'
 })
@@ -20,7 +22,7 @@ export class TaskFormComponent {
       private taskService: TaskService) {
     this.taskForm = this.fb.group({
       id: [UUID.UUID(), Validators.required],
-      name: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(1)]],
       isDone: [false]
     });
   }

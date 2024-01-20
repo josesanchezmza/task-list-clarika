@@ -20,7 +20,6 @@ import {TaskItemComponent} from "../task-item/task-item.component";
 export class TaskListComponent implements OnInit, OnDestroy {
   taskList: Task[] = [];
 
-  isTaskFormVisible=false;
   subscriptions: Subscription[]=[];
 
   constructor(private taskService: TaskService) {
