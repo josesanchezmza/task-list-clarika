@@ -32,10 +32,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "glob": "_redirects",
-            "input": "src",
-            "output": "/"
+            "scripts": []
           },
           "configurations": {
             "production": {
